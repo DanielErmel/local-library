@@ -22,9 +22,13 @@ function getTotalAccountsCount(accounts) {
 }*/
 
 function getBooksBorrowedCount(books) {
-  let total = 0;
-  books.forEach(book => { total += book.borrows.filter(borrow => borrow.returned === false).length});
-  return total
+  let result = 0;
+  result =  books.reduce((acc, book)=> {
+    book.borrows.find((checkedOut) => checkedOut.returned == false)
+      ? acc+=1 : acc+=0;
+      return acc;
+  },0)
+  return result
 }
 
 /*function getMostCommonGenres(books) {
